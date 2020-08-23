@@ -4,4 +4,8 @@ app.listen(3000, () => {
   console.log('start server');
 });
 
-console.log('end of server');
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+  res.sendfile(__dirname + '/public/index.html');
+});

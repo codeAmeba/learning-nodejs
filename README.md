@@ -30,3 +30,23 @@ console.log('end of server');
 
 Node.js v4부터는 ES6 문법을 지원한다. 따라서 화살표 함수, const, let, promise 등도 당연히 사용 가능하다.
 다만 모듈을 불러올 때에는 React처럼 import / export 키워드를 바로 쓸 수 없다. 기본적으로 CommonJS 문법을 따르기 때문에 `const express = require('express')`와 같이 작성해야 하며 import / export 키워드를 쓰기 위해서는 확장자를 `.js`가 아닌 `.mjs`로 써야 한다.
+
+## Nodemon의 용도
+
+Node.js로 작업을 하며 매번 코드를 수정을 할 때마다 수정사항을 반영하기 위해 서버를 껐다, 켰다 반복하는 것은 매우 번거로운 일이다. 그렇기 때문에 수정사항이 발생했을 때 자동으로 서버를 재실행 해주는 플러그인이 필요한데 그것이 Nodemon이다. 일반적으로 글로벌로 설치하여 사용한다. 그리고, 글로벌 설치에는 보통 권한을 요구하기 때문에 `sudo`를 붙여 설치한다.
+
+```bash
+sudo npm i -g nodemon
+```
+
+## GET 요청에 따른 파일 전달
+
+GET 요청은 default 값이다. 내가 리액트에서 API 요청을 할 때에도 GET의 경우는 별도의 method를 붙이지 않았다.
+
+Node.js에는 이러한 GET 요청에 따라 response를 할 수 있는 `get()`이라는 메서드가 존재하며, 이 또한 콜백함수로써 request / response 두 인자를 받는다. 간단한 메시지만 response로 보낼 때에는 `res.send('hi')` 이런 식으로 `send()` 메서드를 활용할 수 있고, 요청에 따른 파일을 보내야 할 때에는 `sendfile()`이라는 메서드를 활용한다. 그리고, 이때 전달하는 파일의 경로는 **절대경로** 이기 때문에 path가 길어질 수밖에 없는데, 다행히 Node.js에서 제공되는 변수인 `__dirname`을 통해 상당 부분은 생략이 가능하다.
+
+```javascript
+app.get('/', (req, res) => {
+  res.sendfile(__dirname + '/public/index.html');
+});
+```
