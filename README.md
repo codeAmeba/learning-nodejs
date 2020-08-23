@@ -50,3 +50,28 @@ app.get('/', (req, res) => {
   res.sendfile(__dirname + '/public/index.html');
 });
 ```
+
+### static
+
+요청에 따라 전달한 html 파일에는 연결된 다른 파일들이 있을 것이다. 그러한 파일들 역시 함께 전달해야 온전한 렌더링이 이루어지는데, 그렇다고 해서 일일이 `sendfile()` 메서드를 붙이는 작업을 하기에는 번거롭다. 따라서 자동으로 특정 디렉토리의 파일들을 함께 보내주도록 설정을 해줘야 하는데 이때 사용하는 것이 `static()`이다.
+
+```javascript
+app.use(express.static('public'));
+```
+
+## POST
+
+GET은 서버에서 클라이언트로 요청받은 파일을 보내주기만 하면 되지만, POST는 클라이언트에서 작성된 데이터를 서버에서 받아 처리해야 한다. 따라서 이때는 전달받은 데이터를 처리할 수 있는 도구가 필요한데 그것이 `body parser`다.
+
+`npm install body-parser --save`
+
+설치가 완료되면, express 서버에게도 body-parser를 사용하겠다는 의사를 표명해야 한다.
+
+```javascript
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+```
+
+`use()` 메서드를 활용하여 두 번에 걸쳐 설정을 했는데, 보통 데이터가 JSON 형태로 오기 때문에 `bodyParser.json()`을 설정했고, `urlencoded`의 경우, 한글로 이루어진 URL은 인코딩이 필요하기에 설정하는 것이 좋다.
