@@ -15,9 +15,9 @@ Node.js는 브라우저가 아닌 곳에서 JavaScript를 실행할 수 있도�
 ## Node는 기본적으로 비동기
 
 ```javascript
-var express = require('express');
-var app = express();
-app.listen(3000, function () {
+const express = require('express');
+const app = express();
+app.listen(3000, () => {
   console.log('start server');
 });
 
@@ -25,3 +25,8 @@ console.log('end of server');
 ```
 
 위와 같이 입력한 후 서버를 실행하면, 콘솔에는 'end of server'가 먼저 찍히는 것을 볼 수 있다. 그것은 `app.listen()`에 'start server'가 콜백으로 전달됐기 때문이고, 그말은 곧 비동기로 실행된다는 말이다. 따라서, `app.listen()` 이후의 실행코드는 서버가 구동할 때까지 기다리지 않고 먼저 실행된다.
+
+## Node.js에서도 화살표 함수 가능
+
+Node.js v4부터는 ES6 문법을 지원한다. 따라서 화살표 함수, const, let, promise 등도 당연히 사용 가능하다.
+다만 모듈을 불러올 때에는 React처럼 import / export 키워드를 바로 쓸 수 없다. 기본적으로 CommonJS 문법을 따르기 때문에 `const express = require('express')`와 같이 작성해야 하며 import / export 키워드를 쓰기 위해서는 확장자를 `.js`가 아닌 `.mjs`로 써야 한다.

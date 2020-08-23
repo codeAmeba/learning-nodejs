@@ -1,6 +1,6 @@
-var express = require('express');
-var app = express();
-app.listen(3000, function () {
+const express = require('express');
+const app = express();
+app.listen(3000, () => {
   console.log('start server');
 });
 
