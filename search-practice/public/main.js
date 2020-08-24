@@ -1,12 +1,13 @@
-const submit = document.querySelector('.searchInput');
+const submit = document.querySelector('.searchSubmit');
 
-submit.addEventListener('click', () => {
-  const inputData = document.querySelector('.searchInput').value;
+submit.addEventListener('click', (e) => {
+  e.preventDefault();
+  let inputData = document.querySelector('.searchInput').value;
   sendAjax('http://127.0.0.1:3000/ajax_send_keyword', inputData);
 });
 
 const sendAjax = (url, data) => {
-  let myData = { keyword: data };
+  let myData = { text: data };
   myData = JSON.stringify(myData);
 
   const xhr = new XMLHttpRequest();

@@ -29,10 +29,6 @@ h1 {
   color: rgba(0, 0, 0, 0.8);
 }
 
-form {
-  margin-top: 50px;
-}
-
 .searchInput {
   width: 280px;
   height: 40px;
@@ -53,6 +49,7 @@ form {
   background-color: ivory;
   border: 1px solid rgba(0, 0, 0, 0.8);
   cursor: pointer;
+  outline: none;
 }
 
 .searchSubmit:hover {
