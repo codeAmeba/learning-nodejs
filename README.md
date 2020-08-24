@@ -99,3 +99,29 @@ app.post('/email_post', (req, res) => {
 찾아보니 React의 `jsx` 문법을 템플릿으로 활용할 수도 있다는 것 같다. 완강 후에 꼭 시도해봐야겠다.
 
 - [express-react-views](https://github.com/reactjs/express-react-views)
+
+## CORS
+
+ajax를 통한 POST를 연습하다가 CORS(Cross Origin Resource Sharing)에 의한 통신오류를 만났다. CORS는 현재의 도메인과 다른 도메인으로 리소스를 요청할 경우를 의미하는데, 웹 개발을 하다 보면 가장 흔하게 만나게 되는 오류 중 하나라고 알고있다. 이러한 CORS 오류의 원인에는 보안 상의 이유로 브라우저에서 제한하기 때문이며, 공교롭게도 SPA의 경우는 RESTful API를 통해 비동기 통신으로 주로 이루어지기에 필연적으로 CORS에 제한이 걸린다.
+
+위와 같은 이유들로 CORS 제한을 해제해줄 필요가 있는데, 서버의 응답 헤더의 설정을 `Access-Control-Allow-Origin: *` 이렇게 변경해주는 방법도 있지만, 이미 훌륭한 모듈이 있기에 아래와 같이 설치해주자.
+
+```bash
+npm install cors --save
+```
+
+그리고, 서버파일에서 모듈을 불러온다.
+
+```javascript
+const cors = require('cors');
+
+app.use(cors());
+
+app.get('/form.html', (req, res, next) => {
+  res.json({ msg: 'this is CORS-enabled for all origins' });
+});
+
+app.listen(80, () => {
+  console.log('CORS-enabled web server listening on port 80');
+});
+```
