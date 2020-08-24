@@ -75,3 +75,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 ```
 
 `use()` 메서드를 활용하여 두 번에 걸쳐 설정을 했는데, 보통 데이터가 JSON 형태로 오기 때문에 `bodyParser.json()`을 설정했고, `urlencoded`의 경우, 한글로 이루어진 URL은 인코딩이 필요하기에 설정하는 것이 좋다.
+
+## Template
+
+클라이언트로부터 받은 데이터를 기반하여 바로 화면(view)을 구성할 수 있는 템플릿(Template)라는 것이다. 대표적인 문법으로는 `ejs`가 있는데, 사용하기에 앞서 관련 패키지를 설치해야 하며,
+
+```bash
+npm install ejs --save
+```
+
+아래와 같이 서버파일에 어떤 방식으로 화면을 구성할 것인지 설정을 해주어야 한다.
+
+```javascript
+app.set('view engine', 'ejs');
+
+app.post('/email_post', (req, res) => {
+  console.log(req.body.email);
+  // res.send('<h1>Welcome ' + req.body.email + '</h1>');
+  res.render('email.ejs', { email: req.body.email });
+});
+```
+
+찾아보니 React의 `jsx` 문법을 템플릿으로 활용할 수도 있다는 것 같다. 완강 후에 꼭 시도해봐야겠다.
+
+- [express-react-views](https://github.com/reactjs/express-react-views)
