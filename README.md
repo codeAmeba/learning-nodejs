@@ -39,7 +39,7 @@ Node.js로 작업을 하며 매번 코드를 수정을 할 때마다 수정사�
 sudo npm i -g nodemon
 ```
 
-## GET 요청에 따른 파일 전달
+## GET
 
 GET 요청은 default 값이다. 내가 리액트에서 API 요청을 할 때에도 GET의 경우는 별도의 method를 붙이지 않았다.
 

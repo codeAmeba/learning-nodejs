@@ -19,5 +19,6 @@ app.get('/main', (req, res) => {
 });
 
 app.post('/email_post', (req, res) => {
-  res.send('post res');
+  console.log(req.body.email);
+  res.send('<h1>Welcome ' + req.body.email + '</h1>');
 });
