@@ -125,3 +125,56 @@ app.listen(80, () => {
   console.log('CORS-enabled web server listening on port 80');
 });
 ```
+
+## MySQL 연결
+
+Node.js 서버와 MySQL 데이터베이스를 연결하기 위해서는 `mysql` 패키지를 추가로 설치해야 한다.
+
+```shell
+npm install mysql --save
+```
+
+그리고 아래와 같이 모듈을 불러온 뒤 설정이 필요하다.
+
+```javascript
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  port: 3306,
+  user: 'root',
+  password: 'pw123',
+  database: 'nodejs',
+});
+
+connection.connect();
+```
+
+그런데 내 경우엔 연결 후 서버를 구동했을 때 아래와 같은 오류를 만났다.
+
+```shell
+ {
+  code: 'ER_NOT_SUPPORTED_AUTH_MODE',
+  errno: 1251,
+  sqlMessage: 'Client does not support authentication protocol requested by server; consider upgrading MySQL client',
+  sqlState: '08004',
+  fatal: true
+}
+[nodemon] app crashed - waiting for file changes before starting...
+```
+
+메시지를 보면 알 수 있듯 이 오류는 서버측 오류가 아니라 데이터베이스 즉, MySQL에서 출력된 오류다. 따라서 MySQL에 뭔가 인증 관련된 설정을 해줘야 한다는 것을 추측할 수 있었다.
+오류 메시지를 기반으로 구글링을 해본 결과 스택오버플로우에서 해결책을 찾을 수 있었다.
+MySQL 쿼리에 다음과 같이 작성한다.
+
+```shell
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'pw123';
+```
+
+정확한 내용은 아직 모르겠지만, 대충 '내가 설정한 비밀번호가 맞으니 접근을 허용해도 좋다'라는 의미라고 추측된다. 그리고, 다음과 같이 MySQL 리프레쉬를 한 번 한다.
+
+```shell
+flush privilefes;
+```
+
+다시 Node.js 서버를 구동해보면 정상적으로 작동하는 것을 볼 수 있다.

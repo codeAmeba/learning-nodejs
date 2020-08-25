@@ -2,6 +2,18 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
+const mysql = require('mysql');
+const password = 'tndud1454!';
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  port: 3306,
+  user: 'root',
+  password: password,
+  database: 'nodejs',
+});
+
+connection.connect();
 
 app.listen(3000, () => {
   console.log('start server');
