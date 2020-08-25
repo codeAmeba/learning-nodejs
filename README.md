@@ -189,3 +189,4 @@ flush privilefes;
 - [SQLBolt](https://sqlbolt.com/)
 - [데이터베이스](https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4)
 - [SQL기초](https://zzsza.github.io/development/2018/03/18/sql-for-everyone/)
+- [NoSQL - 몽고DB](https://poiemaweb.com/mongdb-basics)
