@@ -178,3 +178,11 @@ flush privilefes;
 ```
 
 다시 Node.js 서버를 구동해보면 정상적으로 작동하는 것을 볼 수 있다.
+
+## Database
+
+데이터베이스는 이름 그대로 **'수집한 데이터를 여러 목적으로 활용하기 위해 체계화하고 통합 및 관리하는 데이터의 집합'** 이다.
+데이터베이스를 크게 양분하는 두 갈래로는 관계형 데이터모델(RDBMS)와 NoSQL이다. 아직까지는 SQL(Structured Query Language)을 통해 데이터를 관리하는 관계형 데이터베이스가 강세를 보이는 듯 하지만, 몽고DB로 대표되는 NoSQL도 큰 관심을 받고있다.
+
+- [SQL Fiddle](http://sqlfiddle.com/)
+- [데이터베이스](https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4)
