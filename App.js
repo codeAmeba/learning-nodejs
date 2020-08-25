@@ -1,19 +1,10 @@
 const express = require('express');
-const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
-const password = 'tndud1454!';
+const cors = require('cors');
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: password,
-  database: 'nodejs',
-});
-
-connection.connect();
+const main = require('./router/main');
+const email = require('./router/email');
 
 app.listen(3000, () => {
   console.log('start server');
@@ -25,6 +16,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
+app.use('/main', main);
+app.use('/email', email);
+
 app.get('/form.html', (req, res, next) => {
   res.json({ msg: 'this is CORS-enabled for all origins' });
 });
@@ -34,21 +28,6 @@ app.listen(80, () => {
 });
 
 app.get('/', (req, res) => {
-  res.sendfile(__dirname + '/public/index.html');
-});
-
-app.get('/main', (req, res) => {
-  res.sendfile(__dirname + '/public/index.html');
-});
-
-app.post('/email_post', (req, res) => {
-  console.log(req.body.email);
-  // res.send('<h1>Welcome ' + req.body.email + '</h1>');
-  res.render('email.ejs', { email: req.body.email });
-});
-
-app.post('/ajax_send_email', (req, res) => {
-  console.log(req.body.email);
-  const responseData = { result: 'ok', email: req.body.email };
-  res.json(responseData);
+  console.log('test');
+  res.sendFile(__dirname + '/public/main.html');
 });
