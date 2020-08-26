@@ -203,7 +203,6 @@ Create, Read, Update, Delete의 약자로 데이터 조작에 필요한 4가지 
 ```javascript
 const query = connection.query(
   `INSERT INTO user (email, name, pw) VALUES ('${email}', '${name}', '${password}');`,
-  sql,
   (err, rows) => {
     if (err) {
       throw err;
