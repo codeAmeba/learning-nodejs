@@ -191,3 +191,47 @@ flush privilefes;
 - [데이터베이스](https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4)
 - [SQL기초](https://zzsza.github.io/development/2018/03/18/sql-for-everyone/)
 - [NoSQL - 몽고DB](https://poiemaweb.com/mongdb-basics)
+
+## CRUD
+
+Create, Read, Update, Delete의 약자로 데이터 조작에 필요한 4가지 요소를 의미한다. 각 기능에 따라 API를 제작한다.
+
+## 데이터 DB로 전송하기
+
+`<form>` 등의 태그에서 입력된 정보를 데이터베이스에 넣을 때에는 당연히 GET이 아닌 POST를 사용한다. 또한, SQL를 사용하는 관계형데이터베이스라면 **쿼리문** 을 통해 연결된 데이터베이스에 데이터를 넣을 수가 있다.
+
+```javascript
+const query = connection.query(
+  `INSERT INTO user (email, name, pw) VALUES ('${email}', '${name}', '${password}');`,
+  sql,
+  (err, rows) => {
+    if (err) {
+      throw err;
+    } else {
+      res.render('welcome.ejs', { name: name, id: rows.insertId });
+    }
+  }
+);
+```
+
+이때, 위와 같이 일반적인 방식의 INSERT 쿼리문을 통해 데이터를 넣을 수도 있지만, MySQL에서는 아래와 같은 단축표현 방식을 제공하고 있다.
+
+```javascript
+router.post('/', (req, res) => {
+  const body = req.body;
+  const email = body.email;
+  const name = body.name;
+  const password = body.password;
+  const sql = { email, name, pw: password };
+
+  const query = connection.query('INSERT INTO user SET ?', sql, (err, rows) => {
+    if (err) {
+      throw err;
+    } else {
+      res.render('welcome.ejs', { name: name, id: rows.insertId });
+    }
+  });
+});
+```
+
+- [mysqljs - Escaping query identifiers](https://github.com/mysqljs/mysql#escaping-query-identifiers)
