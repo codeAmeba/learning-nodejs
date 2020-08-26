@@ -182,8 +182,9 @@ flush privilefes;
 ## Database
 
 데이터베이스는 이름 그대로 **'수집한 데이터를 여러 목적으로 활용하기 위해 체계화하고 통합 및 관리하는 데이터의 집합'** 이다.
-데이터베이스를 크게 양분하는 두 갈래로는 관계형 데이터모델(RDBMS)와 NoSQL이다. 아직까지는 SQL(Structured Query Language)을 통해 데이터를 관리하는 관계형 데이터베이스가 강세를 보이는 듯 하지만, 몽고DB로 대표되는 NoSQL도 큰 관심을 받고있다.
+데이터베이스를 크게 양분하는 두 갈래로는 관계형 데이터모델(RDBMS)와 NoSQL이다. 관계형 데이터베이스는 SQL을 사용하여 데이터를 구조화한 데이터베이스를 말하고, NoSQL은 말 그대로 SQL을 사용하지 않는 모든 데이터베이스를 말한다. 대표적으로 문서 형태로 데이터를 보관하는 MongoDB가 있으며, 그 외에도 Graph의 형태를 하는 데이터베이스 등도 있다. 가장 기본이 되며, 데이터의 입출력이 비교적 원활한 SQL로 시작하는 것을 추천한다.
 
+- [SQL vs NoSQL - Nomad Coders](https://youtu.be/Q_9cFgzZr8Q)
 - [SQL Fiddle](http://sqlfiddle.com/)
 - [SQLZOO](https://sqlzoo.net/wiki/SQL_Tutorial)
 - [SQLBolt](https://sqlbolt.com/)
