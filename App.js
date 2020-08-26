@@ -1,10 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const router = require('./router/index');
 const cors = require('cors');
-
-const main = require('./router/main');
-const email = require('./router/email');
 
 app.listen(3000, () => {
   console.log('start server');
@@ -16,8 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-app.use('/main', main);
-app.use('/email', email);
+app.use(router);
 
 app.get('/form.html', (req, res, next) => {
   res.json({ msg: 'this is CORS-enabled for all origins' });
@@ -25,9 +22,4 @@ app.get('/form.html', (req, res, next) => {
 
 app.listen(80, () => {
   console.log('CORS-enabled web server listening on port 80');
-});
-
-app.get('/', (req, res) => {
-  console.log('test');
-  res.sendFile(__dirname + '/public/main.html');
 });
