@@ -19,8 +19,22 @@ const connection = mysql.createConnection({
 connection.connect();
 
 router.get('/', (req, res) => {
-  console.log('get join url');
-  res.render('join.ejs');
+  let msg;
+  const erMsg = req.flash('error');
+  if (erMsg) {
+    msg = erMsg;
+  }
+  res.render('join.ejs', { message: msg });
+});
+
+passport.serializeUser((user, done) => {
+  console.log('passport session save: ', user.id);
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  console.log('passport session get in: ', id);
+  done(null, id);
 });
 
 passport.use(
@@ -32,9 +46,42 @@ passport.use(
       passReqToCallback: true,
     },
     (req, email, password, done) => {
-      console.log('local-join callback called');
+      const query = connection.query(
+        `SELECT * FROM user WHERE email=?`,
+        [email],
+        (err, rows) => {
+          if (err) {
+            return done(err);
+          }
+          if (rows.length) {
+            console.log('existed user');
+            return done(null, false, { message: 'your email is already used' });
+          } else {
+            const sql = { email: email, pw: password };
+            const query = connection.query(
+              `INSERT INTO user SET ?`,
+              sql,
+              (err, rows) => {
+                if (err) {
+                  throw err;
+                }
+                return done(null, { email: email, id: rows.insertId });
+              }
+            );
+          }
+        }
+      );
     }
   )
+);
+
+router.post(
+  '/',
+  passport.authenticate('local-join', {
+    successRedirect: '/main',
+    failureRedirect: '/join',
+    failureFlash: true,
+  })
 );
 
 // router.post('/', (req, res) => {
