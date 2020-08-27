@@ -234,3 +234,29 @@ router.post('/', (req, res) => {
 ```
 
 - [mysqljs - Escaping query identifiers](https://github.com/mysqljs/mysql#escaping-query-identifiers)
+
+## Passport
+
+Passport는 이름 그대로 여권과 같은 역할을 한다. 웹사이트에 방문하여 첫 로그인 시 유저의 정보를 세션에 저장하여 인증하는 방식을 취하는 일종의 Node.js를 위한 인증 미들웨어라고 할 수 있다. passport의 사용을 위해 아래와 같은 패키지를 설치해야 한다.
+
+```shell
+npm install passport-local express-session connect-flash --save-dev
+```
+
+### passport-local
+
+로그인을 직접 구현할 때 사용된다.
+
+이외에도 passport-google-oauth, passport-facebook, passport-twitter, passport-kakao, passport-naver 등 특정 SNS를 통한 로그인 등에 사용하는 passport 패키지도 있다.
+
+### express-session
+
+passport로 로그인 후 유저 정보를 세션에 저장하기 위해 사용한다.
+
+### connect-flash
+
+다른 패키지들에 비해 상대적으로 중요도는 떨어지며, 로그인 후 일회성 메시지를 웹브라우저에 나타낼 때 사용한다.
+
+- [Passport.js](http://www.passportjs.org/)
+- [Passport.js github](https://github.com/jaredhanson/passport)
+- [제로초 passport.js](https://www.zerocho.com/category/NodeJS/post/57b7101ecfbef617003bf457)
