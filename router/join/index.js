@@ -33,7 +33,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  console.log('passport session get in: ', id);
+  console.log('passport session get id: ', id);
   done(null, id);
 });
 
@@ -57,7 +57,7 @@ passport.use(
             console.log('existed user');
             return done(null, false, { message: 'your email is already used' });
           } else {
-            const sql = { email: email, pw: password };
+            const sql = { email: email, password: password };
             const query = connection.query(
               `INSERT INTO user SET ?`,
               sql,

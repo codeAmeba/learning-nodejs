@@ -21,7 +21,7 @@ app.listen(80, () => {
 });
 
 app.get('/', (req, res) => {
-  res.sendfile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 app.post('/ajax_send_keyword', (req, res) => {

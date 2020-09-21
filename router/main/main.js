@@ -4,9 +4,9 @@ const router = express.Router();
 const path = require('path');
 
 router.get('/', (req, res) => {
-  console.log('main page', req.user);
+  console.log('main js loaded', req.user);
   const id = req.user;
-  res.sendFile(path.join(__dirname, '../../public/main.html'));
+  // res.sendFile(path.join(__dirname, '../../public/main.html'));
   res.render('main.ejs', { id });
 });
 
